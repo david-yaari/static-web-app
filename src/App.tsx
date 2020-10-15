@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
 
   const loadData = async () => {
     const apiUrl = `http://localhost:7071/api/GetMessage`;
-    const apiUrl2 = `https://api.github.com/users/hacktivist123/repos`;
+    //const apiUrl2 = `https://api.github.com/users/hacktivist123/repos`;
     fetch(apiUrl)
       .then((response) => response.json())
       //.then((data) => console.log(data))
