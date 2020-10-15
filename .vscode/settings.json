@@ -1,11 +1,16 @@
 {
-    "staticWebApps.appSubpath": "/",
-    "staticWebApps.apiSubpath": "",
-    "staticWebApps.appArtifactSubpath": "build",
-    "azureFunctions.deploySubpath": "api",
-    "azureFunctions.postDeployTask": "npm install",
-    "azureFunctions.projectLanguage": "TypeScript",
-    "azureFunctions.projectRuntime": "~2",
-    "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune"
+  "staticWebApps.appSubpath": "/",
+  "staticWebApps.apiSubpath": "",
+  "staticWebApps.appArtifactSubpath": "build",
+  "azureFunctions.deploySubpath": "api",
+  "azureFunctions.postDeployTask": "npm install",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~2",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "npm prune",
+  "liveServer.settings.proxy": {
+    "enable": true,
+    "baseUri": "/api",
+    "proxyUri": "http://127.0.0.1:7071/api"
+  }
 }
