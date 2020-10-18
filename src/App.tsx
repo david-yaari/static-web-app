@@ -7,29 +7,23 @@ function App() {
     message: string;
   }
 
-  const [appState, setAppState] = useState([
-    {
-      id: 1,
-      message: '',
-    },
-  ]);
+  const [appState, setAppState] = useState([{ id: 1, message: '' }]);
+  const [docState, setDocState] = useState([{ id: 1, name: '' }]);
 
   useEffect(() => {
     loadData();
   }, []);
 
-  
   const loadData = async () => {
-    //const apiUrl2 = `https://api.github.com/users/hacktivist123/repos`;
-    let response = await fetch(`${process.env.REACT_APP_API_URL}/GetMessage`);
-    let body = await response.json()
-    console.log(process.env.REACT_APP_API_URL)
-    console.log(body)
-    setAppState(body)
-    //fetch(apiUrl)
-      //.then((response) => response.json())
-      //.then((data) => console.log(data))
-     //.then((data) => setAppState(data));
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/GetMessage`);
+    const body = await response.json();
+    setAppState(body);
+
+    const response2 = await fetch(
+      `${process.env.REACT_APP_API_URL}/GetCosmosDBDoc`
+    );
+    const body2 = await response2.json();
+    setDocState(body2);
   };
 
   return (
@@ -51,6 +45,13 @@ function App() {
           return (
             <li key={item.id} className='list'>
               <span>{item.message}</span>
+            </li>
+          );
+        })}
+        {docState.map((item) => {
+          return (
+            <li key={item.id} className='list'>
+              <span>{item.name}</span>
             </li>
           );
         })}

@@ -1,0 +1,28 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "documents",
+      "databaseName": "dbtodos",
+      "collectionName": "items",
+      "connectionStringSetting": "ecommercedb_DOCUMENTDB"
+    }
+  ],
+  "scriptFile": "../dist/GetCosmosDBDoc/index.js"
+}
