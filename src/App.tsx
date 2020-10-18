@@ -21,6 +21,9 @@ function App() {
   const loadData = async () => {
     const apiUrl = `/api/GetMessage`;
     //const apiUrl2 = `https://api.github.com/users/hacktivist123/repos`;
+    let response = await fetch(`${process.env.REACT_APP_API_URL}/GetMessage`);
+    console.log(process.env.REACT_APP_API_URL)
+    console.log(response)
     fetch(apiUrl)
       .then((response) => response.json())
       //.then((data) => console.log(data))
