@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   const loadData = async () => {
-    const apiUrl = `http://localhost:7071/api/GetMessage`;
+    const apiUrl = `http://localhost:7071/GetMessage`;
     //const apiUrl2 = `https://api.github.com/users/hacktivist123/repos`;
     fetch(apiUrl)
       .then((response) => response.json())
