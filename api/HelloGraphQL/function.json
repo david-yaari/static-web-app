@@ -13,5 +13,5 @@
       "name": "$return"
     }
   ],
-  "scriptFile": "../dist/TriviaGraphQL/index.js"
+  "scriptFile": "../dist/HelloGraphQL/index.js"
 }

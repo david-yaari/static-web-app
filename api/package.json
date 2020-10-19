@@ -11,6 +11,7 @@
     "generate": "graphql-codegen"
   },
   "dependencies": {
+    "apollo-server-azure-functions": "^2.18.2",
     "graphql": "^15.3.0"
   },
   "devDependencies": {
