@@ -8,16 +8,22 @@
     "prestart": "npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\"",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@azure/cosmos": "^3.9.2",
     "apollo-server-azure-functions": "^2.18.2",
     "graphql": "^15.3.0"
   },
   "devDependencies": {
     "@azure/functions": "^1.0.2-beta2",
-    "@graphql-codegen/cli": "^1.17.10",
-    "@graphql-codegen/typescript": "^1.17.10",
+    "@graphql-codegen/cli": "1.18.0",
+    "@graphql-codegen/introspection": "1.18.0",
+    "@graphql-codegen/typescript": "^1.17.11",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
+    "@graphql-codegen/typescript-react-apollo": "^2.0.7",
+    "@graphql-codegen/typescript-resolvers": "^1.17.10",
+    "@graphql-codegen/typescript-type-graphql": "^1.18.1",
     "azure-functions-core-tools": "^2.7.2936",
     "typescript": "^3.3.3"
   }
