@@ -17,22 +17,22 @@ interface DataStore {
 }
 
 class CosmosDataStore implements DataStore {
-  #client: CosmosClient;
-  #databaseName = "trivia";
-  #containerName = "questions";
+  client: CosmosClient;
+  databaseName = "trivia";
+  containerName = "questions";
 
-  #getContainer = () => {
-    return this.#client
-      .database(this.#databaseName)
-      .container(this.#containerName);
+  getContainer = () => {
+    return this.client
+      .database(this.databaseName)
+      .container(this.containerName);
   };
 
   constructor(client: CosmosClient) {
-    this.#client = client;
+    this.client = client;
   }
 
   async getQuestionById(id: string) {
-    const container = this.#getContainer();
+    const container = this.getContainer();
 
     const question = await container.items
       .query<QuestionModel>({
@@ -45,7 +45,7 @@ class CosmosDataStore implements DataStore {
   }
 
   async getQuestions() {
-    const container = this.#getContainer();
+    const container = this.getContainer();
 
     const question = await container.items
       .query<QuestionModel>({
@@ -57,19 +57,19 @@ class CosmosDataStore implements DataStore {
   }
 }
 
-class MockDataStore implements DataStore {
-  #data: QuestionModel[];
-  constructor() {
-    this.#data = require("../../trivia.json");
-  }
+// class MockDataStore implements DataStore {
+//   data: QuestionModel[];
+//   constructor() {
+//     this.data = require("../../trivia.json");
+//   }
 
-  getQuestionById(id: string): Promise<QuestionModel> {
-    return Promise.resolve(this.#data.find((q) => q.id === id));
-  }
-  getQuestions(): Promise<QuestionModel[]> {
-    return Promise.resolve(this.#data);
-  }
-}
+//   getQuestionById(id: string): Promise<QuestionModel> {
+//     return Promise.resolve(this.data.find((q) => q.id === id));
+//   }
+//   getQuestions(): Promise<QuestionModel[]> {
+//     return Promise.resolve(this.data);
+//   }
+// }
 
 export const dataStore = new CosmosDataStore(
   new CosmosClient(process.env.CosmosDB)

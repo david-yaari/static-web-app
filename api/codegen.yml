@@ -6,9 +6,9 @@ generates:
     config:
       contextType: './data#Context'
       avoidOptionals:
-        field: false
-        inputValue: false
         object: false
+        inputValue: false
+        field: false
       mappers:
         Question: ./data#QuestionModel
     plugins:
