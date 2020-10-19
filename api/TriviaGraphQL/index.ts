@@ -1,17 +1,43 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
-const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-    context.log('HTTP trigger function processed a request.');
-    const name = (req.query.name || (req.body && req.body.name));
-    const responseMessage = name
-        ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-        : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
+// import { loadSchemaSync } from '@graphql-tools/load';
+// import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+// import { addResolversToSchema } from '@graphql-tools/schema';
+// import { join } from 'path';
 
-    context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: responseMessage
-    };
+// import { makeExecutableSchema } from '@graphql-tools/schema';
+const { loadSchema } = require('@graphql-tools/load');
+const { JsonFileLoader } = require('@graphql-tools/json-file-loader');
 
-};
 
-export default httpTrigger;
+
+import { ApolloServer } from "apollo-server-azure-functions";
+import { importSchema } from "graphql-import";
+import resolvers from "./resolvers";
+import { dataStore } from "./data";
+
+// const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), { loaders: [new GraphQLFileLoader()] });
+
+
+// const schemaWithResolvers = addResolversToSchema({
+//     schema,
+//     resolvers,
+// });
+
+
+const server = new ApolloServer({
+    typeDefs: importSchema("./TriviaGraphQL/schema.graphql"),
+    resolvers,
+    context: {
+        dataStore,
+    },
+});
+
+// module.exports = server.createHandler({
+//     cors: {
+//         origin: "http://localhost:3000",
+//         credentials: true,
+//         allowedHeaders: ["Content-Type", "Origin", "Accept"],
+//     },
+// });
+
+export default server.createHandler();
